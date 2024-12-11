@@ -1,0 +1,47 @@
+# Кеши и временные файлы Xcode
+build/
+*.xcworkspace/xcuserdata/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+
+# Файлы схемы сборки
+xcuserdata/
+project.xcworkspace/xcuserdata/
+scheme/
+
+# Архивы и результаты сборки
+DerivedData/
+*.ipa
+*.dSYM.zip
+*.appex
+
+# Логи и отчеты о тестировании
+Logs/
+Reports/
+TestResults/
+
+# Подключаемые модули CocoaPods
+Pods/
+Podfile.lock
+
+# Символические ссылки
+.DS_Store
+
+# Swift Package Manager
+.build/
+
+# Документация и ресурсы
+Docs/
+Resources/
+
+# Конфигурационные файлы
+user.xcconfig
+
+# Временные файлы от симулятора
+~/Library/Developer/Xcode/DerivedData/*
+~/Library/Caches/CocoaPods/
+~/Library/Developer/CoreSimulator/Devices/*/data/Containers/Bundle/Application/
+
+# Прочие системные файлы
+.idea/
+.vscode/
+*.swp
