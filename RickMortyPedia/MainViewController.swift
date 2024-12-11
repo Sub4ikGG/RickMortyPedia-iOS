@@ -12,14 +12,18 @@ class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = .background
-        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(navigate)))
+        view.backgroundColor = .background
+        
+        let charactersButton = UIMainButton(title: "Characters", width: view.frame.widthWithPadding)
+        charactersButton.center = view.center
+        
+        view.addSubview(charactersButton)
         
         navigationItem.title = "RickMortyPedia"
     }
     
-    @objc func navigate() {
-        
+    @objc func buttonTapped() {
+        print("buttonTapped")
     }
 }
 
