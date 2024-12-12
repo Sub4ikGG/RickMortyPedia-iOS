@@ -16,7 +16,7 @@ class CharactersViewController : UIViewController {
         view.backgroundColor = .background
         title = String(localized: "characters_button")
         
-        // MARK: Setup ScrollView
+        // MARK: - Setup ScrollView
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -29,7 +29,7 @@ class CharactersViewController : UIViewController {
             scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
         ])
         
-        // MARK: Setup ContentView
+        // MARK: - Setup ContentView
         let contentView = UIView()
         contentView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -45,7 +45,7 @@ class CharactersViewController : UIViewController {
             contentView.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor, constant: 1000)
         ])
         
-        // MARK: Добавляем контейнерный UIView для внутренних элементов
+        // MARK: - Setup ContrainerView
         let containerView = UIView()
         containerView.backgroundColor = .clear
         containerView.translatesAutoresizingMaskIntoConstraints = false
@@ -59,7 +59,7 @@ class CharactersViewController : UIViewController {
             containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16), // Правый отступ
         ])
         
-        // MARK: Setup TempView
+        // MARK: - Setup TempView
         let tempView = UIView()
         tempView.backgroundColor = .gray
         tempView.layer.cornerRadius = ViewConstants.defaultCornerRadius
