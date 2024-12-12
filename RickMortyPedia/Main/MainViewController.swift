@@ -43,6 +43,8 @@ class MainViewController: UIViewController {
     override func loadView() {
         super.loadView()
         
+        setupButtonsActions()
+        
         let stackView = UIStackView(arrangedSubviews: [rickImageView, charactersButton, locationsButton, episodesButton])
         stackView.axis = .vertical
         stackView.spacing = 10
@@ -59,6 +61,27 @@ class MainViewController: UIViewController {
         ])
         
         navigationItem.title = "RickMortyPedia"
+    }
+    
+    private func setupButtonsActions() {
+        charactersButton.addTarget(self, action: #selector(showCharactersViewController), for: .touchUpInside)
+        locationsButton.addTarget(self, action: #selector(showLocationsViewController), for: .touchUpInside)
+        episodesButton.addTarget(self, action: #selector(showEpisodesViewController), for: .touchUpInside)
+    }
+    
+    @objc private func showCharactersViewController() {
+        let charactersViewController = CharactersViewController()
+        navigationController?.pushViewController(charactersViewController, animated: true)
+    }
+    
+    @objc private func showLocationsViewController() {
+        let locationsViewController = UIViewController()
+        navigationController?.pushViewController(locationsViewController, animated: true)
+    }
+    
+    @objc private func showEpisodesViewController() {
+        let episodesViewController = UIViewController()
+        navigationController?.pushViewController(episodesViewController, animated: true)
     }
 }
 
