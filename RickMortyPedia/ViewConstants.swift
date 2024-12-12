@@ -8,5 +8,11 @@
 import Foundation
 
 struct ViewConstants {
-    static let defaultPadding: CGFloat = 32
+    static let defaultCornerRadius: CGFloat = 8
+    static let defaultPadding: CGFloat = 20
+    
+    static let leadingPadding: CGFloat = defaultPadding
+    static let trailingPadding: CGFloat = -defaultPadding
+    static let topPadding: CGFloat = defaultPadding
+    static let bottomPadding: CGFloat = -defaultPadding
 }

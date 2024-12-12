@@ -28,7 +28,7 @@ class UIMainButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(_ frame: CGRect = CGRect(), title: String, width: CGFloat) {
+    init(title: String, _ frame: CGRect = CGRect(), width: CGFloat = 0) {
         self.title = title
         self.width = width
         
@@ -41,11 +41,12 @@ class UIMainButton: UIButton {
         setTitle(title, for: .normal)
         setTitleColor(.buttonTitle, for: .normal)
 
-        layer.cornerRadius = 16
         layer.masksToBounds = true
+        layer.cornerRadius = ViewConstants.defaultCornerRadius
         
         frame.size.height = 64
-        frame.size.width = width
+        frame.size.width = superview?.frame.widthWithPadding ?? width
+        heightAnchor.constraint(equalToConstant: 64).isActive = true
         
         backgroundColor = .button
     }
