@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 class UIMainButton: UIButton {
     
@@ -50,13 +51,17 @@ class UIMainButton: UIButton {
     }
 }
 
-#Preview {
-    let vc = UIViewController()
-    let button = UIMainButton(title: "UIMainButton", width: vc.view.frame.widthWithPadding)
-    
-    vc.view.addSubview(button)
-    
-    button.center = vc.view.center
-    
-    return vc
+struct UIMainButton_Preview: PreviewProvider {
+    static var previews: some View {
+        UIViewControllerPreview {
+            let vc = UIViewController()
+            let button = UIMainButton(title: "UIMainButton", width: vc.view.frame.widthWithPadding)
+            
+            vc.view.addSubview(button)
+            
+            button.center = vc.view.center
+            
+            return vc
+        }
+    }
 }

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class MainViewController: UIViewController {
 
@@ -27,9 +28,11 @@ class MainViewController: UIViewController {
     }
 }
 
-#Preview {
-    let navigationController = UINavigationController(rootViewController: MainViewController())
-    navigationController.navigationBar.prefersLargeTitles = true
-    
-    return navigationController
+struct MainViewController_Preview: PreviewProvider {
+    static var previews: some View {
+        UIViewControllerPreview {
+            let vc = MainViewController()
+            return vc
+        }
+    }
 }
