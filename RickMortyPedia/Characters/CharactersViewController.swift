@@ -10,6 +10,9 @@ import UIKit
 import SwiftUI
 
 class CharactersViewController : UIViewController {
+    let contentView = UIView()
+    let stackView = UIStackView()
+    
     override func loadView() {
         super.loadView()
         
@@ -30,7 +33,6 @@ class CharactersViewController : UIViewController {
         ])
         
         // MARK: - Setup ContentView
-        let contentView = UIView()
         contentView.translatesAutoresizingMaskIntoConstraints = false
         
         scrollView.addSubview(contentView)
@@ -42,38 +44,49 @@ class CharactersViewController : UIViewController {
             contentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
             
             contentView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            contentView.heightAnchor.constraint(greaterThanOrEqualTo: view.heightAnchor, constant: 1000)
         ])
         
         // MARK: - Setup ContrainerView
         let containerView = UIView()
-        containerView.backgroundColor = .clear
         containerView.translatesAutoresizingMaskIntoConstraints = false
-
+        
         contentView.addSubview(containerView)
-
+        
         NSLayoutConstraint.activate([
             containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),   // Верхний отступ
-            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),  // Нижний отступ
             containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16), // Левый отступ
             containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16), // Правый отступ
         ])
         
-        // MARK: - Setup TempView
-        let tempView = UIView()
-        tempView.backgroundColor = .gray
-        tempView.layer.cornerRadius = ViewConstants.defaultCornerRadius
-        tempView.translatesAutoresizingMaskIntoConstraints = false
+        // MARK: - Setup StackView
+        stackView.axis = .vertical
+        stackView.spacing = ViewConstants.defaultSpacing
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         
-        containerView.addSubview(tempView)
+        contentView.addSubview(stackView)
         
         NSLayoutConstraint.activate([
-            tempView.topAnchor.constraint(equalTo: containerView.topAnchor),
-            tempView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            tempView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            stackView.topAnchor.constraint(equalTo: containerView.topAnchor),
+            stackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
         ])
         
-        tempView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        // MARK: - Setup TempView
+        for i in 1..<10 {
+            let tempView = UIView()
+            tempView.backgroundColor = UIColor.black.withAlphaComponent(1.0 / Double(i))
+            tempView.layer.cornerRadius = ViewConstants.defaultCornerRadius * 3
+            
+            stackView.addArrangedSubview(tempView)
+            
+            tempView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        contentView.heightAnchor.constraint(greaterThanOrEqualTo: stackView.heightAnchor, constant: ViewConstants.defaultPadding * 2).isActive = true
     }
 }
 
