@@ -72,14 +72,13 @@ class CharactersViewController : UIViewController {
         ])
         
         // MARK: - Setup TempView
-        for i in 1..<10 {
+        for i in 1..<30 {
             let tempView = UIView()
-            tempView.backgroundColor = UIColor.black.withAlphaComponent(1.0 / Double(i))
-            tempView.layer.cornerRadius = ViewConstants.defaultCornerRadius * 3
+            tempView.backgroundColor = UIColor.gray.withAlphaComponent(1.0 - (Double(i) / 100.0))
             
             stackView.addArrangedSubview(tempView)
             
-            tempView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+            tempView.heightAnchor.constraint(equalToConstant: .random(in: 100...500)).isActive = true
         }
     }
     

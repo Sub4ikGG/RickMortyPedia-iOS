@@ -75,7 +75,7 @@ class MainViewController: UIViewController {
     }
     
     @objc private func showLocationsViewController() {
-        let locationsViewController = UIViewController()
+        let locationsViewController = LocationsViewController()
         navigationController?.pushViewController(locationsViewController, animated: true)
     }
     
