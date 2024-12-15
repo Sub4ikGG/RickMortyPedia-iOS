@@ -1,5 +1,5 @@
 //
-//  LocationCell.swift
+//  CharacterCell.swift
 //  RickMortyPedia
 //
 //  Created by Кирилл Ефремов on 13.12.2024.
@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import SwiftUI
 
-class LocationCell: UITableViewCell {
+class CharacterCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -19,7 +19,7 @@ class LocationCell: UITableViewCell {
         super.init(coder: aDecoder)
     }
     
-    func initialize(location: Location) {
+    func initialize(location: Character) {
         self.selectionStyle = .none
         
         let stackView = UIStackView()

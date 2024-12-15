@@ -2,7 +2,7 @@
 //  CharactersViewController.swift
 //  RickMortyPedia
 //
-//  Created by Кирилл Ефремов on 12.12.2024.
+//  Created by Кирилл Ефремов on 13.12.2024.
 //
 
 import Foundation
@@ -10,82 +10,62 @@ import UIKit
 import SwiftUI
 
 class CharactersViewController : UIViewController {
-    let contentView = UIView()
-    let stackView = UIStackView()
+    private let tableView = UITableView(frame: .zero, style: .plain)
+    
+    private let items: [Character] = [
+        Character(name: "Moscow"),
+        Character(name: "Saint-Petersburg"),
+        Character(name: "Katowice"),
+        Character(name: "Frankfurt"),
+        Character(name: "Dallas")
+    ]
     
     override func loadView() {
         super.loadView()
         
+        title = String(localized: "locations_button")
         view.backgroundColor = .background
-        title = String(localized: "characters_button")
         
-        // MARK: - Setup ScrollView
-        let scrollView = UIScrollView()
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        // MARK: - Setup TableView
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.allowsSelection = false
         
-        view.addSubview(scrollView)
-        
-        NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-        ])
-        
-        // MARK: - Setup ContentView
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        
-        scrollView.addSubview(contentView)
+        self.view.addSubview(tableView)
         
         NSLayoutConstraint.activate([
-            contentView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
-            contentView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
-            contentView.leadingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leadingAnchor),
-            contentView.trailingAnchor.constraint(equalTo: scrollView.contentLayoutGuide.trailingAnchor),
-            
-            contentView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
-        
-        // MARK: - Setup ContrainerView
-        let containerView = UIView()
-        containerView.translatesAutoresizingMaskIntoConstraints = false
-        
-        contentView.addSubview(containerView)
-        
-        NSLayoutConstraint.activate([
-            containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),   // Верхний отступ
-            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16), // Левый отступ
-            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16), // Правый отступ
-        ])
-        
-        // MARK: - Setup StackView
-        stackView.axis = .vertical
-        stackView.spacing = ViewConstants.defaultSpacing
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        contentView.addSubview(stackView)
-        
-        NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: containerView.topAnchor),
-            stackView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-        ])
-        
-        // MARK: - Setup TempView
-        for i in 1..<30 {
-            let tempView = UIView()
-            tempView.backgroundColor = UIColor.gray.withAlphaComponent(1.0 - (Double(i) / 100.0))
-            
-            stackView.addArrangedSubview(tempView)
-            
-            tempView.heightAnchor.constraint(equalToConstant: .random(in: 100...500)).isActive = true
-        }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        contentView.heightAnchor.constraint(greaterThanOrEqualTo: stackView.heightAnchor, constant: ViewConstants.defaultPadding * 2).isActive = true
+        self.tableView.register(CharacterCell.self, forCellReuseIdentifier: "UITableViewCell")
+        self.tableView.dataSource = self
+        self.tableView.rowHeight = UITableView.automaticDimension
+        self.tableView.estimatedRowHeight = UITableView.automaticDimension
+        self.tableView.separatorStyle = .none
+    }
+}
+
+extension CharactersViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.items.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath) as! CharacterCell
+        let item = items[indexPath.row]
+        cell.initialize(location: item)
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
 }
 

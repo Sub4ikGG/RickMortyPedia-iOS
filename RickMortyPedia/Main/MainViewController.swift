@@ -71,11 +71,17 @@ class MainViewController: UIViewController {
     
     @objc private func showCharactersViewController() {
         let charactersViewController = CharactersViewController()
+        charactersViewController.view.backgroundColor = .background
+        charactersViewController.title = String(localized: "characters_button")
+        
         navigationController?.pushViewController(charactersViewController, animated: true)
     }
     
     @objc private func showLocationsViewController() {
-        let locationsViewController = LocationsViewController()
+        let locationsViewController = UIViewController()
+        locationsViewController.view.backgroundColor = .background
+        locationsViewController.title = String(localized: "locations_button")
+        
         navigationController?.pushViewController(locationsViewController, animated: true)
     }
     
