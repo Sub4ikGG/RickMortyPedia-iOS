@@ -80,7 +80,7 @@ class MainViewController: UIViewController {
     }
     
     @objc private func showEpisodesViewController() {
-        let episodesViewController = UIViewController()
+        let episodesViewController = EpisodesViewController()
         navigationController?.pushViewController(episodesViewController, animated: true)
     }
 }
