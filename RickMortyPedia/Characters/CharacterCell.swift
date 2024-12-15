@@ -46,10 +46,10 @@ class CharacterCell: UITableViewCell {
     }
 }
 
-struct LocationCell_Preview: PreviewProvider {
+struct CharacterCell_Preview: PreviewProvider {
     static var previews: some View {
         UIViewControllerPreview {
-            let vc = LocationsViewController()
+            let vc = CharactersViewController()
             let navigationController = UINavigationController(rootViewController: vc)
             navigationController.navigationBar.prefersLargeTitles = true
             

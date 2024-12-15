@@ -13,24 +13,27 @@ class CharactersViewController : UIViewController {
     private let tableView = UITableView(frame: .zero, style: .plain)
     
     private let items: [Character] = [
-        Character(name: "Moscow"),
-        Character(name: "Saint-Petersburg"),
-        Character(name: "Katowice"),
-        Character(name: "Frankfurt"),
-        Character(name: "Dallas")
+        Character(name: "Rick"),
+        Character(name: "Morty"),
+        Character(name: "Kirill"),
+        Character(name: "Danya"),
+        Character(name: "Vladislav")
     ]
     
     override func loadView() {
         super.loadView()
         
-        title = String(localized: "locations_button")
+        title = String(localized: "characters_button")
         view.backgroundColor = .background
         
         // MARK: - Setup TableView
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.allowsSelection = false
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = UITableView.automaticDimension
+        tableView.separatorStyle = .none
         
-        self.view.addSubview(tableView)
+        view.addSubview(tableView)
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -43,11 +46,8 @@ class CharactersViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tableView.register(CharacterCell.self, forCellReuseIdentifier: "UITableViewCell")
-        self.tableView.dataSource = self
-        self.tableView.rowHeight = UITableView.automaticDimension
-        self.tableView.estimatedRowHeight = UITableView.automaticDimension
-        self.tableView.separatorStyle = .none
+        tableView.register(CharacterCell.self, forCellReuseIdentifier: "UITableViewCell")
+        tableView.dataSource = self
     }
 }
 
